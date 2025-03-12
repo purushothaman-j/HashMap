@@ -1,14 +1,14 @@
 import java.util.LinkedList;
 import java.util.Objects;
 
-public class PracticeHashMap {
+public class PracticeHashMap<S,I> {
 
 
-    public static class Item{
-        String key;
-        Integer value;
+    public static class Item<S,I>{
+        S key;
+        I value;
 
-        public Item(String key,Integer value){
+        public Item(S key,I value){
             this.key=key;
             this.value=value;
         }
@@ -21,10 +21,10 @@ public class PracticeHashMap {
         bucket = new LinkedList[INITIAL_CAPACITY];
     }
 
-    public int hash(String key){
+    public int hash(S key){
         return key == null ? 0 : Math.abs(key.hashCode() % bucket.length);
     }
-    public void put(String key, Integer value){
+    public void put(S key, I value){
     System.out.println("size "+ this.size);
         System.out.println("bucket length: "+ this.bucket.length);
         System.out.println(key+ " " +value);
@@ -54,14 +54,14 @@ public class PracticeHashMap {
 return;
     }
 
-public Integer get(String key){
+public I get(S key){
     int index = hash(key);
 
     if(bucket[index]==null){
         return null;
     }
 
-    for(Item item : bucket[index]){
+    for(Item<S,I> item : bucket[index]){
         if(Objects.equals(item.key,key)){
 
             return item.value;
@@ -70,13 +70,13 @@ public Integer get(String key){
     return null;
 }
 
-public boolean containsKey(String key){
+public boolean containsKey(S key){
        return  this.get(key) != null;
 }
 
 //    remove
 
-    public void remove(String key){
+    public void remove(S key){
         int index = hash(key);
 
         if(bucket[index]==null){
@@ -98,7 +98,7 @@ public boolean containsKey(String key){
           if(list != null){
 
 
-          for(Item item  :list){
+          for(Item<S,I> item  :list){
               this.put(item.key, item.value);
           }
           }
@@ -121,8 +121,9 @@ public boolean containsKey(String key){
         hashMap1.put("Six",1);
        System.out.println(hashMap1.get("Five")+ "" + hashMap1.containsKey("One")+ "" +hashMap1.containsKey("Two"));
 
-   //  PracticeHashMap hashMap2 = new PracticeHashMap();
-     //   hashMap2.put(1, "ONE");
+     PracticeHashMap hashMap2 = new PracticeHashMap();
+        hashMap2.put(1, "OONLY NE");
+        System.out.println(hashMap2.get(1));
     }
 
 
